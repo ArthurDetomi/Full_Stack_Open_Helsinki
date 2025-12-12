@@ -31,4 +31,28 @@ describe("Tests from <Blog /> component", () => {
 
     expect(hiddenElement).not.toBeInTheDocument();
   });
+
+  test("Blog details renders when clicking in the button", async () => {
+    const newBlog = {
+      id: 1,
+      title: "new blog",
+      author: "Ruan",
+      url: "@newblog",
+      likes: 12,
+      user: {
+        name: "Ruan",
+      },
+    };
+    const user = userEvent.setup();
+
+    const { container } = render(<Blog blog={newBlog} />);
+
+    const button = screen.getByText("view");
+
+    await user.click(button);
+
+    const element = container.querySelector(".blog-desc");
+
+    expect(element).toBeInTheDocument();
+  });
 });
