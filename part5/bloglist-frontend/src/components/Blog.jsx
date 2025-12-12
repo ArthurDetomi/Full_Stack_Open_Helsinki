@@ -16,11 +16,11 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
   };
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog-item">
       {blog.title} {blog.author}{" "}
       <button onClick={handleClick}>{visible ? "hide" : "view"}</button>
       {visible && (
-        <>
+        <div className="blog-desc">
           <p>{blog.url}</p>
           <p>
             likes {blog.likes ?? 0}{" "}
@@ -28,7 +28,7 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
           </p>
           <p>{blog.user.name}</p>
           <button onClick={() => deleteBlog(blog.id)}>delete</button>
-        </>
+        </div>
       )}
     </div>
   );
