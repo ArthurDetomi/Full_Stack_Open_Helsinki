@@ -35,6 +35,7 @@ const BlogForm = ({ createBlog }) => {
               })
             }
             required={true}
+            placeholder="title"
           />
         </div>
         <div>
@@ -49,6 +50,7 @@ const BlogForm = ({ createBlog }) => {
               })
             }
             required={true}
+            placeholder="author"
           />
         </div>
         <div>
@@ -63,6 +65,7 @@ const BlogForm = ({ createBlog }) => {
               })
             }
             required={true}
+            placeholder="url"
           />
         </div>
 
