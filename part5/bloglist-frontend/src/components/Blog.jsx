@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useImperativeHandle } from "react";
 
 const Blog = ({ blog, likeBlog, deleteBlog }) => {
   const [visible, setVisible] = useState(false);
@@ -15,6 +15,26 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
     setVisible(!visible);
   };
 
+  return (
+    <BlogContainer
+      blog={blog}
+      blogStyle={blogStyle}
+      handleClick={handleClick}
+      likeBlog={likeBlog}
+      deleteBlog={deleteBlog}
+      visible={visible}
+    />
+  );
+};
+
+export const BlogContainer = ({
+  blog,
+  blogStyle,
+  handleClick,
+  likeBlog,
+  deleteBlog,
+  visible,
+}) => {
   return (
     <div style={blogStyle} className="blog-item">
       {blog.title} {blog.author}{" "}
