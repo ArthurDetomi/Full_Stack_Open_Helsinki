@@ -59,5 +59,38 @@ describe("Blog app", () => {
 
       cy.contains("a blog created by cypress");
     });
+
+    describe("and a blog exists", function () {
+      beforeEach(function () {
+        cy.createBlog({
+          title: "First blog",
+          author: "Cypress",
+          url: "first.com",
+        });
+        cy.createBlog({
+          title: "Second blog",
+          author: "Cypress",
+          url: "second.com",
+        });
+        cy.createBlog({
+          title: "Third blog",
+          author: "Cypress",
+          url: "third.com",
+        });
+      });
+
+      it("can like one of the blogs", function () {
+        cy.contains("view").first().click();
+        cy.contains("like").click();
+        cy.contains("likes 1");
+      });
+
+      it("can delete one of the blogs", function () {
+        cy.contains("view").first().click();
+        cy.contains("delete").click();
+
+        cy.contains("blog First blog by Cypress deleted successfully!");
+      });
+    });
   });
 });
