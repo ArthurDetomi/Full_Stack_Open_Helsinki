@@ -13,5 +13,3 @@
 
 [Phonebook - APP deploy](https://phonebook-bk.fly.dev/)
 [NoteApp](https://examples-hidden-violet-8584.fly.dev/)
-
-Parei em testando os formularios parte 5 letra c
