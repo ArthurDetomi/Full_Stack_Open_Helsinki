@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze";
 import { describe, expect, test } from "vitest";
-import counterReducer from "./counterReducer";
+import counterReducer from "../reducers/counterReducer";
 
 describe("unicafe reducer", () => {
   const initialState = {
