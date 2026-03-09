@@ -10,6 +10,16 @@ const getAll = async () => {
   return await response.json();
 };
 
+const getById = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch anecdotes");
+  }
+
+  return await response.json();
+};
+
 const createNew = async (content) => {
   const options = {
     method: "POST",
@@ -26,4 +36,22 @@ const createNew = async (content) => {
   return await response.json();
 };
 
-export default { getAll, createNew };
+const vote = async (id) => {
+  const anecdote = await getById(id);
+
+  const options = {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ votes: anecdote.votes + 1 }),
+  };
+
+  const response = await fetch(`${baseUrl}/${id}`, options);
+
+  if (!response.ok) {
+    throw new Error("Failed to voted anecdote id = " + id);
+  }
+
+  return await response.json();
+};
+
+export default { getAll, createNew, vote };
