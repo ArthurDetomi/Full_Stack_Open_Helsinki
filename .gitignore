@@ -1,6 +1,9 @@
 **/examples/
 **/**examples
 **/**examples*
+**/example/
+**/**example
+**/**example*
 .note
 .env
 **/.env
@@ -10,3 +13,4 @@ package-lock.json
 part3/phonebook_bk/node_modules/.package-lock.json
 .gitignore
 **/.gitignore
+db.json
