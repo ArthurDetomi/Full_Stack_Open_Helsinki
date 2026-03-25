@@ -35,7 +35,7 @@ const getRatingDescription = (rating: Rating): string => {
   }
 };
 
-const getAverage = (exercises: number[]) => {
+const getAverage = (exercises: number[]): number => {
   const sum = exercises.reduce((acc: number, curr: number) => {
     return acc + curr;
   }, 0);
@@ -69,6 +69,28 @@ const calculateExercises = (exercises: number[]): MetricsResponse => {
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1]));
+const parseArgs = (args: string[]): number[] => {
+  if (args.length < 3) throw new Error("Not enough arguments");
 
-console.log(calculateExercises([3, 2, 2, 4.5, 2, 3, 1]));
+  const numbers = args.slice(2).map((n) => {
+    const numberConverted = Number(n);
+    if (isNaN(numberConverted)) {
+      throw new Error("Provided values were not numbers!");
+    }
+    return numberConverted;
+  });
+
+  return numbers;
+};
+
+try {
+  const numbers = parseArgs(process.argv);
+
+  console.log(calculateExercises(numbers));
+} catch (error: unknown) {
+  let errorMessage = "Something bad happened.";
+  if (error instanceof Error) {
+    errorMessage += error.message;
+  }
+  console.log(errorMessage);
+}
