@@ -4,7 +4,7 @@ enum Rating {
   Good = 3,
 }
 
-interface MetricsResponse {
+export interface MetricsResponse {
   periodLenght: number;
   trainingDays: number;
   success: boolean;
@@ -43,7 +43,10 @@ const getAverage = (exercises: number[]): number => {
   return sum / exercises.length;
 };
 
-const calculateExercises = (exercises: number[]): MetricsResponse => {
+export const calculateExercises = (
+  exercises: number[],
+  target: number,
+): MetricsResponse => {
   const periodLenght = exercises.length;
 
   const trainingDays = exercises.filter((n) => n > 0).length;
@@ -56,15 +59,13 @@ const calculateExercises = (exercises: number[]): MetricsResponse => {
 
   const ratingDescription = getRatingDescription(rating);
 
-  const TARGET = Rating.Ok;
-
   return {
     periodLenght,
     trainingDays,
     success,
     rating,
     ratingDescription,
-    target: TARGET,
+    target,
     average,
   };
 };
@@ -86,7 +87,7 @@ const parseArgs = (args: string[]): number[] => {
 try {
   const numbers = parseArgs(process.argv);
 
-  console.log(calculateExercises(numbers));
+  console.log(calculateExercises(numbers, 2.5));
 } catch (error: unknown) {
   let errorMessage = "Something bad happened.";
   if (error instanceof Error) {
