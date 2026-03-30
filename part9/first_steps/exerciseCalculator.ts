@@ -7,7 +7,7 @@ enum Rating {
 interface MetricsResponse {
   periodLenght: number;
   trainingDays: number;
-  success: Boolean;
+  success: boolean;
   rating: Rating;
   ratingDescription: string;
   target: Rating;
