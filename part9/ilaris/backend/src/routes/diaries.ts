@@ -1,19 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import express, { NextFunction, Request, Response } from "express";
 import diaryService from "../services/diaryService";
-import {
-  DiaryEntry,
-  NewDiaryEntry,
-  NonSensitiveDiaryEntry,
-} from "../types/types";
+import { DiaryEntry, NewDiaryEntry } from "../types/types";
 import { NewEntrySchema } from "../utils/utils";
 
 import { z } from "zod";
 
 const router = express.Router();
 
-router.get("/", (_req, res: Response<NonSensitiveDiaryEntry[]>) => {
-  res.send(diaryService.getNonSensitiveEntries());
+router.get("/", (_req, res: Response<DiaryEntry[]>) => {
+  res.send(diaryService.getEntries());
 });
 
 router.get("/:id", (req, res) => {
