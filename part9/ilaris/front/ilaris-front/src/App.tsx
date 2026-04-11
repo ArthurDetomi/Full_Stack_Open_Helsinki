@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import type { DiaryEntry } from "./types/diaries";
+import type { DiaryEntry, NewDiaryEntry } from "./types/diaries";
 
 import diaryService from "./services/diaries";
+import Header from "./components/Header";
+import DiaryList from "./components/DiaryList";
+import DiaryForm from "./components/DiaryForm";
 
 const App = () => {
   const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
@@ -16,24 +19,19 @@ const App = () => {
     fecthData();
   }, []);
 
-  return (
-    <div>
-      <h1>Diary entries</h1>
-      {diaries.map((d) => (
-        <div>
-          <div
-            style={{ fontWeight: "bold", marginTop: "20px", fontSize: "1.2em" }}
-          >
-            {d.date}
-          </div>
+  const handleSubmitDiary = async (newDiaryEntry: NewDiaryEntry) => {
+    const diary = await diaryService.createDiary(newDiaryEntry);
 
-          <div style={{ margin: "10px 0", fontSize: "1em" }}>
-            <div>visibility: {d.visibility}</div>
-            <div>weather: {d.weather}</div>
-            <div>comment: {d.comment}</div>
-          </div>
-        </div>
-      ))}
+    setDiaries(diaries.concat(diary));
+  };
+
+  return (
+    <div id="main">
+      <Header title="Diary entries" />
+
+      <DiaryForm handleSubmit={handleSubmitDiary} />
+
+      <DiaryList diaries={diaries} />
     </div>
   );
 };
